@@ -1,37 +1,52 @@
-## Welcome to GitHub Pages
+## Compiladores 1
 
-You can use the [editor on GitHub](https://github.com/compiladores-fga/video-aulas/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+### Estrutura do curso
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+1. Introdução a analisadores sintáticos.
+  - Descida recursiva.
+  - Combinadores de parsers. 
+2. Gramáticas livres de contexto.
+3. Linguagens regulares.
+4. Algoritmo LL(1).
 
-### Markdown
+### Outros conceitos importantes
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+1. Python.
+  - Tutoriais, sites de estudo, exercícios etc.
+  - Sintaxe básica do Python.
+  - Orientação a objetos.
+  - Programação funcional.
+  - Estrutura de dados básicas da linguagem.
+2. Git básico.
+3. Ambiente de programação.
+  - Virtualenv.
+  - Docker.
+  - Configurando editor de código.
+4. Recursos externos.
+  - [Regex101](https://regex101.com/): Site para testar expressões regulares.
+  - [Palavras cruzadas](https://regexcrossword.com/): Palavras cruzadsas baseadas em expressões regulares.
+5. Glossário de termos.
+
+
+
+### Ajuda
+
+Consulte a [documentação](https://docs.github.com/categories/github-pages-basics/) do github pages ou pergunte no grupo do Telegram. Abaixo segue uma pequena referência do formato [Markdown](https://guides.github.com/features/mastering-markdown/) utilizado nesta Wiki:
 
 ```markdown
-Syntax highlighted code block
+Bloco com sintaxe Markdown.
 
-# Header 1
-## Header 2
-### Header 3
+# Título
+## Subtítulo
+### Sub-subtítulo
 
-- Bulleted
-- List
+- Lista
+- de itens
 
-1. Numbered
-2. List
+1. Lista
+2. numerada
 
-**Bold** and _Italic_ and `Code` text
+Formatação como **Negrito**, _Itálico_ e `código fonte`.
 
-[Link](url) and ![Image](src)
+Também temos [Link](url) e ![Imagem](src)
 ```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/compiladores-fga/video-aulas/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
