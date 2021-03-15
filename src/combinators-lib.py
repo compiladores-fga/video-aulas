@@ -194,8 +194,25 @@ def read_string(st: ST) -> Tuple[ST, str]:
     return (pos_end + 1, src), string
 
 
+def skip_spaces(st: ST) -> Tuple[ST, Any]:
+    """
+    Pula espaços.
+    """
+    pos, src = st
+    while pos < len(src) and src[pos].isspace():
+        pos += 1
+    return (pos, src), None
+
+
+def strip(parser: AnyParser) -> Parser:
+    """
+    Remove espaços do inicio e fim do parser.
+    """
+    return ws >> as_parser(parser) << ws
+
 number = Parser(read_number)
 string = Parser(read_string)
+ws = Parser(skip_spaces)
 
 json_options = []
 value = anyof(json_options)
@@ -203,12 +220,12 @@ true = literal("true", True)
 false = literal("false", False)
 null = literal("null", None)
 
-elements = value.sep_by(",")
-array = "[" >> elements << "]"
+elements = value.sep_by(strip(","))
+array = "[" >> strip(elements) << "]"
 
-pair = join([string << ":", value])
-pairs = pair.sep_by(",")
-object_ = dict @ ("{" >> pairs << "}")
+pair = join([string << strip(":"), value])
+pairs = pair.sep_by(strip(","))
+object_ = dict @ ("{" >> strip(pairs) << "}")
 
 json_options.extend([true, false, null, number, string, array, object_])
 
@@ -222,10 +239,24 @@ def loads(text: str) -> object:
 
 
 # Exemplos
-print(loads("true"))
-print(loads("false"))
-print(loads("null"))
-print(loads("42"))
-print(loads('"Hello World"'))
-print(loads("[true,false,null,[1,2,3,[]]]"))
-print(loads('{"answer":[1,2,[]]}'))
+assert loads("true") is True
+assert loads("false") is False
+assert loads("null") is None
+
+assert loads("42") == 42
+assert loads('"Hello World"') == "Hello World"
+
+assert loads("[1,2,3]") == [1, 2, 3]
+assert loads("[[42]]") == [[42]]
+assert loads("[1, 2, 3]") == [1, 2, 3]
+assert loads("[ 1, 2, 3 ]") == [1, 2, 3]
+assert loads("[ 1 , 2   ,    3   ]") == [1, 2, 3]
+assert loads("[ ]") == []
+
+assert loads('{"key":"value"}') == {"key": "value"}
+assert loads("{}") == {}
+assert loads('{"x":1,"y":2}') == {"x": 1, "y": 2}
+assert loads('{"x":1, "y":2}') == {"x": 1, "y": 2}
+assert loads('{"x" : 1, "y" : 2}') == {"x": 1, "y": 2}
+assert loads('{ "x" : 1, "y" : 2 }') == {"x": 1, "y": 2}
+assert loads("{ }") == {}

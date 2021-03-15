@@ -28,14 +28,14 @@ grammar = Lark(
         | cmp
 
 ?cmp    : sum ">" sum    -> gt
-        | sum "<" sum    -> lt
+        | sum "<" sum    -> lt 
         | sum ">=" sum   -> ge
         | sum "<=" sum   -> le
         | sum "==" sum   -> eq
         | sum "!=" sum   -> ne
         | sum
 
-?sum    : sum "+" mul    -> add     
+?sum    : sum "+" mul    -> add 
         | sum "-" mul    -> sub
         | mul
 
@@ -61,8 +61,7 @@ INT     : ("0".."9")+
 NAME    : ("a".."z"|"_")+
 
 %ignore " "
-"""
-)
+""", parser='lalr')
 
 def make_binop(fn):
     def binop(self, x, y):
@@ -101,6 +100,7 @@ class CalcEval(Interpreter):
     def __init__(self, env):
         self.env = env
         self.env.update(self.GLOBAL_VARIABLES)
+        super().__init__()
 
     def not_(self, x):
         return not self.visit(x)
@@ -136,6 +136,7 @@ class CalcEval(Interpreter):
 
 exemplos = [
     'x = y = 21; x + y',
+    'x = 1; loop 5 x = 2 * x; x',
     'cos(pi) + ln(e)',
     'if pi > 3 then 4 else 3 / 0',
     '3 - 2 - 1', 
