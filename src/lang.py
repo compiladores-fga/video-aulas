@@ -28,7 +28,7 @@ grammar = Lark(
         | cmp
 
 ?cmp    : sum ">" sum    -> gt
-        | sum "<" sum    -> lt 
+        | sum "<" sum    -> lt
         | sum ">=" sum   -> ge
         | sum "<=" sum   -> le
         | sum "==" sum   -> eq
